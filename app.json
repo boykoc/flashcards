@@ -1,5 +1,20 @@
 {
   "expo": {
-    "sdkVersion": "22.0.0"
+    "sdkVersion": "22.0.0",
+    "orientation": "portrait",
+    "name": "Flashcards",
+    "description": "Udacity React Native project.",
+    "slug": "flashcards",
+    "version": "1.0",
+    "icon": "https://maxcdn.icons8.com/Color/PNG/512/Sports/triathlon-512.png",
+    "notification": {
+      "icon": "http://www.student-scholarships.com/images/made/img/featured/nav_basketball_45_45.png"
+    },
+    "ios": {
+     "bundleIdentifier": "org.flashcards.exp",
+    },
+    "android": {
+     "package": "org.flashcards.exp",
+    }
   }
 }
