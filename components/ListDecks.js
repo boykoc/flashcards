@@ -1,21 +1,16 @@
 import React, { Component } from 'react'
 import { Text, KeyboardAvoidingView, TouchableOpacity, View, FlatList } from 'react-native'
-import { saveDeckTitle } from '../utils/api'
+import { getDecks } from '../utils/api'
 import { connect } from 'react-redux'
-import { addDeck } from '../actions'
+import { recieveDecks } from '../actions'
 
-export default class ListDecks extends Component {
-  state = {
-    decks: [
-      {
-        title: 'title 1', 
-        questions: []
-      }, 
-      {
-        title: 'title 2',
-        questions: []
-      }
-    ]
+class ListDecks extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props
+    
+    getDecks().then(
+      (decks) => dispatch(recieveDecks(decks))
+    )
   }
   
   renderItem = ({ item }) => {
@@ -28,7 +23,7 @@ export default class ListDecks extends Component {
   }  
   
   render() {
-    const { decks } = this.state
+    const { decks } = this.props
     return (
       <View>
         <FlatList
@@ -39,3 +34,11 @@ export default class ListDecks extends Component {
     )
   }
 }
+
+function mapStateToProps (decks) {
+  return {
+    decks: Object.keys(decks).map((deck) => (decks[deck]))
+  }
+}
+
+export default connect(mapStateToProps)(ListDecks)

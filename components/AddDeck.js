@@ -12,7 +12,14 @@ class AddDeck extends Component {
     
   handleSubmit = () => {
     // Save to redux store
-    this.props.dispatch(addDeck(this.state.title))
+    this.props.dispatch(addDeck(
+      {
+        [this.state.title]: {
+          title: this.state.title,
+          questions: []
+        }
+      }
+    ))
     
     // Save to DB
     saveDeckTitle(this.state.title)

@@ -31,7 +31,9 @@ const DEFAULT_STATE = {
  * Return all of the decks along with their titles, questions, and answers.
  */ 
 export function getDecks () {
-    
+  return AsyncStorage.getItem(STORAGE_KEY).then((response) => { 
+    return JSON.parse(response) 
+  })
 }
 
 /**
@@ -45,12 +47,12 @@ export function getDeck (id) {
  * Take in a single title argument and add it to the decks. 
  */
 export function saveDeckTitle (title) {
-    return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
-        [title]: {
-            title: title,
-            questions: []
-        } 
-    }))
+  return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
+    [title]: {
+      title: title,
+      questions: []
+    } 
+  }))
 }
 
 /**
