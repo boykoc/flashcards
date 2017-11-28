@@ -16,8 +16,10 @@ class ListDecks extends Component {
   renderItem = ({ item }) => {
     return (
       <View>
-        <Text>{item.title}</Text>
-        <Text>{item.questions.length} cards</Text>
+        <TouchableOpacity>
+          <Text>{item.title}</Text>
+          <Text>{item.questions.length} cards</Text>
+        </TouchableOpacity>
       </View>
     )
   }  
