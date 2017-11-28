@@ -3,7 +3,7 @@
 import { RECIEVE_DECKS, ADD_DECK } from '../actions'
 
 function decks (state = {}, action) {
-    switch (action.tyep) {
+    switch (action.type) {
         case RECIEVE_DECKS:
             return {
                 ...state,
