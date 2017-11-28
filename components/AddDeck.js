@@ -23,6 +23,12 @@ class AddDeck extends Component {
     
     // Save to DB
     saveDeckTitle(this.state.title)
+    
+    // Navigate back to list.
+    this.props.navigation.goBack()
+    
+    // Clear title for next deck.
+    this.setState(() => ({ title: '' }))    
   }
   
   handleTextChange = (textValue) => {
