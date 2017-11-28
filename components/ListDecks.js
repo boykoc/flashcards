@@ -16,7 +16,11 @@ class ListDecks extends Component {
   renderItem = ({ item }) => {
     return (
       <View>
-        <TouchableOpacity>
+        <TouchableOpacity 
+          onPress={() => this.props.navigation.navigate(
+            'Deck',
+            { deck: item.title }
+        )}>
           <Text>{item.title}</Text>
           <Text>{item.questions.length} cards</Text>
         </TouchableOpacity>

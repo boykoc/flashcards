@@ -8,6 +8,7 @@ import ListDecks from './components/ListDecks'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { StatusBar } from 'react-native';
 import { Constants } from 'expo'
+import Deck from './components/Deck'
 
 function FlashcardsStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -58,13 +59,28 @@ const Tabs = TabNavigator({
   }
 })
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: '#FFFFFF',
+      headerStyle: {
+        backgroundColor: '#292477'
+      }
+    }
+  }
+})
+
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
           <FlashcardsStatusBar backgroundColor='#292477' barStyle='light-content' />
-          <Tabs />
+          <MainNavigator />
         </View>
       </Provider>
     )
