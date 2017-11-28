@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { Text, TextInput, KeyboardAvoidingView, TouchableOpacity, View } from 'react-native'
+import { saveDeckTitle } from '../utils/api'
+import { connect } from 'react-redux'
+import { addDeck } from '../actions'
 
-export default class AddDeck extends Component {
+class AddDeck extends Component {
   state = {
     title: '',
     questions: []
@@ -9,7 +12,15 @@ export default class AddDeck extends Component {
     
   handleSubmit = () => {
     // Hoist state (the deck) to App.
+    // TODO: Switch this to redux because it seems to be painful to
+    //       pass around props with navigation when the time comes.
     this.props.onCreateDeck(this.state)
+    
+    // Save to redux store
+    this.props.dispatch(addDeck(this.state.title))
+    
+    // Save to DB
+    saveDeckTitle(this.state.title)
   }
   
   handleTextChange = (textValue) => {
@@ -34,3 +45,5 @@ export default class AddDeck extends Component {
     )
   }
 }
+
+export default connect()(AddDeck)
