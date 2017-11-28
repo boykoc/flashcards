@@ -11,11 +11,6 @@ class AddDeck extends Component {
   }
     
   handleSubmit = () => {
-    // Hoist state (the deck) to App.
-    // TODO: Switch this to redux because it seems to be painful to
-    //       pass around props with navigation when the time comes.
-    this.props.onCreateDeck(this.state)
-    
     // Save to redux store
     this.props.dispatch(addDeck(this.state.title))
     
