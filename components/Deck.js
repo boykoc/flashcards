@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 class Deck extends Component {
   // This wont show for some reason.
+  // I believe this because of npm's version of react-navigation.
+  // This actually works when built, but not in emulators.
   static navigationOptions = ({ navigation }) => {
     const { deck } = navigation.state.params
     
