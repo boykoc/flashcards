@@ -70,6 +70,16 @@ const MainNavigator = StackNavigator({
       headerTintColor: '#FFFFFF',
       headerStyle: {
         backgroundColor: '#292477'
+      },
+      title: 'Add Card'
+    }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTintColor: '#FFFFFF',
+      headerStyle: {
+        backgroundColor: '#292477'
       }
     }
   }
@@ -82,7 +92,6 @@ export default class App extends React.Component {
         <View style={styles.container}>
           <FlashcardsStatusBar backgroundColor='#292477' barStyle='light-content' />
           <MainNavigator />
-          <AddCard />
         </View>
       </Provider>
     )

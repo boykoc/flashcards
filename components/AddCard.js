@@ -11,16 +11,17 @@ class AddCard extends Component {
   }
     
   handleSubmit = () => {
+    const { deck } = this.props.navigation.state.params
     // Save to redux store
     this.props.dispatch(addCard(
-      'Greek History', this.state
+      deck, this.state
     ))
     
     // Save to DB
-    addCardToDeck('Greek History', this.state)
+    addCardToDeck(deck, this.state)
     
     // Navigate back to list.
-    // this.props.navigation.goBack()
+    this.props.navigation.goBack()
     
     // Clear question and answer for next card.
     this.setState(() => ({
