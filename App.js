@@ -10,6 +10,7 @@ import { StatusBar } from 'react-native';
 import { Constants } from 'expo'
 import Deck from './components/Deck'
 import AddCard from './components/AddCard'
+import CardQuiz from './components/CardQuiz'
 
 function FlashcardsStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -70,14 +71,24 @@ const MainNavigator = StackNavigator({
       headerTintColor: '#FFFFFF',
       headerStyle: {
         backgroundColor: '#292477'
-      },
-      title: 'Add Card'
+      }
     }
   },
   AddCard: {
     screen: AddCard,
     navigationOptions: {
       headerTintColor: '#FFFFFF',
+      title: 'Add Card',
+      headerStyle: {
+        backgroundColor: '#292477'
+      }
+    }
+  },
+  CardQuiz: {
+    screen: CardQuiz,
+    navigationOptions: {
+      headerTintColor: '#FFFFFF',
+      title: 'Quiz',
       headerStyle: {
         backgroundColor: '#292477'
       }
