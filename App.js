@@ -9,6 +9,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation'
 import { StatusBar } from 'react-native';
 import { Constants } from 'expo'
 import Deck from './components/Deck'
+import AddCard from './components/AddCard'
 
 function FlashcardsStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -81,6 +82,7 @@ export default class App extends React.Component {
         <View style={styles.container}>
           <FlashcardsStatusBar backgroundColor='#292477' barStyle='light-content' />
           <MainNavigator />
+          <AddCard />
         </View>
       </Provider>
     )
