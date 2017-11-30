@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 
 class CardQuiz extends Component {
@@ -35,40 +35,84 @@ class CardQuiz extends Component {
     }))    
   }  
     
-    render() {
+  render() {
     const { cardIndex, numberCorrect, showAnswer } = this.state
     const { deck } = this.props
     
     return (
-      <View behavior='padding'>
+      <View style={styles.container}>
         {deck.questions.length > cardIndex ?
           <View>
-            <Text>{cardIndex + 1} / {deck.questions.length}</Text>
+            <Text style={styles.count}>{cardIndex + 1} / {deck.questions.length}</Text>
             {showAnswer === true ?
-              <Text>{deck.questions[cardIndex].answer}</Text>
+              <Text style={styles.title}>{deck.questions[cardIndex].answer}</Text>
             : 
-              <Text>{deck.questions[cardIndex].question}</Text>
+              <Text style={styles.title}>{deck.questions[cardIndex].question}</Text>
             }          
             <TouchableOpacity 
+              style={styles.button}
               onPress={this.handleAnswerToggle} >
-              <Text>Answer</Text>
+              <Text style={styles.buttonText}>Answer</Text>
             </TouchableOpacity>
             <TouchableOpacity 
+              style={styles.button}
               onPress={this.handleCorrect} >
-              <Text>Correct</Text>
+              <Text style={styles.buttonText}>Correct</Text>
             </TouchableOpacity>
             <TouchableOpacity 
+              style={styles.button}
               onPress={this.handleIncorrect} >
-              <Text>Incorrect</Text>
+              <Text style={styles.buttonText}>Incorrect</Text>
             </TouchableOpacity>   
           </View>
         :
-          <Text>{(numberCorrect / deck.questions.length * 100).toFixed(2)} % Correct!</Text>
+          <View style={styles.centerContainer}>
+            <Text style={styles.center}>{(numberCorrect / deck.questions.length * 100).toFixed(2)}% Correct!</Text>
+          </View>
         }
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 12
+  },
+  title: {
+    margin: 12,
+    fontSize: 16
+  },
+  text: {
+    marginLeft: 12,
+    fontSize: 14
+  },
+  button: {
+    margin: 12,
+    fontSize: 14,
+    backgroundColor: '#292477',
+    padding: 12,
+    alignItems: 'center',
+    borderRadius: 3,
+    shadowColor: 'rgba(0, 0, 0, 0.24)',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
+    elevation: 2
+  }, 
+  buttonText: {
+    color: '#FFFFFF'
+  },
+  center: {
+    fontSize: 16
+  },
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
 
 function mapStateToProps(state, { navigation }) {
   const { deck } = navigation.state.params
