@@ -85,6 +85,15 @@ class CardQuiz extends Component {
             >
               <Text style={styles.buttonText}>Back to Deck</Text>
             </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.button}
+               onPress={() => this.props.navigation.navigate(
+                'CardQuiz',
+                { deck: deck.title }
+              )}
+            >
+              <Text style={styles.buttonText}>Restart Quiz</Text>
+            </TouchableOpacity>            
           </View>
         }
       </View>
@@ -122,12 +131,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF'
   },
   center: {
-    fontSize: 16
+    fontSize: 16,
+    textAlign: 'center'
   },
   centerContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'center'
   }
 })
 

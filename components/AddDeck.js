@@ -24,8 +24,11 @@ class AddDeck extends Component {
     // Save to DB
     saveDeckTitle(this.state.title)
     
-    // Navigate back to list.
-    this.props.navigation.goBack()
+    // Navigate to new deck.
+    this.props.navigation.navigate(
+      'Deck',
+      { deck: this.state.title }
+    )
     
     // Clear title for next deck.
     this.setState(() => ({ title: '' }))    
