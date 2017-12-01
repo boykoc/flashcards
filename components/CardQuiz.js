@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
+import { clearLocalNotification, setLocalNotification } from '../utils/notification'
 
 class CardQuiz extends Component {
   state = {
@@ -8,7 +9,12 @@ class CardQuiz extends Component {
     numberCorrect: 0,
     showAnswer: false
   }
-    
+  
+  componentDidMount() {
+    clearLocalNotification()
+      .then(setLocalNotification)
+  }
+  
   handleAnswerToggle = () => {
     // Toggle between the question and answer.
     this.setState((state) => ({
@@ -22,7 +28,8 @@ class CardQuiz extends Component {
     // Set quiz state.
     this.setState((state) => ({
       cardIndex: state.cardIndex + 1,
-      numberCorrect: state.numberCorrect + 1
+      numberCorrect: state.numberCorrect + 1,
+      showAnswer: false
     }))    
   }
   
@@ -31,7 +38,8 @@ class CardQuiz extends Component {
     
     // Set quiz state.
     this.setState((state) => ({
-      cardIndex: state.cardIndex + 1
+      cardIndex: state.cardIndex + 1,
+      showAnswer: false
     }))    
   }  
     
@@ -68,6 +76,15 @@ class CardQuiz extends Component {
         :
           <View style={styles.centerContainer}>
             <Text style={styles.center}>{(numberCorrect / deck.questions.length * 100).toFixed(2)}% Correct!</Text>
+            <TouchableOpacity 
+              style={styles.button}
+              onPress={() => this.props.navigation.navigate(
+                'Deck',
+                { deck: deck.title }
+              )}
+            >
+              <Text style={styles.buttonText}>Back to Deck</Text>
+            </TouchableOpacity>
           </View>
         }
       </View>

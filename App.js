@@ -11,6 +11,7 @@ import { Constants } from 'expo'
 import Deck from './components/Deck'
 import AddCard from './components/AddCard'
 import CardQuiz from './components/CardQuiz'
+import { setLocalNotification } from './utils/notification'
 
 function FlashcardsStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -97,6 +98,10 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()  
+  }
+  
   render() {
     return (
       <Provider store={createStore(reducer)}>
