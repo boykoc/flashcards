@@ -72,3 +72,15 @@ export function addCardToDeck (title, card) {
     }))
   })
 }
+
+/**
+ * Remove deck and it's questions. 
+ */ 
+export function deleteDeck (title) {
+  return AsyncStorage.getItem(STORAGE_KEY).then((response) => {
+    const data = JSON.parse(response)
+    data[title] = undefined
+    delete data[title]
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+  })
+}

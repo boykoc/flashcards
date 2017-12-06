@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
+import { recieveDecks } from '../actions'
+import { deleteDeck, getDecks } from '../utils/api'
+
 
 class Deck extends Component {
   // This wont show for some reason.
@@ -14,29 +17,55 @@ class Deck extends Component {
     }
   }
   
+  handleDeleteDeck = () => {
+    const { deck, dispatch } = this.props
+        
+    // Delete from DB.
+    deleteDeck(deck.title).then(() =>
+      // Update redux store.
+      getDecks().then(
+        (decks) => dispatch(recieveDecks(decks))
+      )
+    )
+    
+    // Navigate to Decks.
+    this.props.navigation.navigate(
+      'ListDecks'
+    )  
+  }
+  
   render() {
     const { deck } = this.props
     
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{deck.title}</Text>
-        <Text style={styles.text}>{deck.questions.length} cards</Text>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => this.props.navigation.navigate(
-            'AddCard',
-            { deck: deck.title }
-        )}>
-          <Text style={styles.buttonText}>Add Card</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => this.props.navigation.navigate(
-            'CardQuiz',
-            { deck: deck.title }
-        )}>
-          <Text style={styles.buttonText}>Start Quiz</Text>
-        </TouchableOpacity>
+        { deck && (
+          <View>      
+            <Text style={styles.title}>{deck.title}</Text>
+            <Text style={styles.text}>{deck.questions.length} cards</Text>
+            <TouchableOpacity 
+              style={styles.button}
+              onPress={() => this.props.navigation.navigate(
+                'AddCard',
+                { deck: deck.title }
+            )}>
+              <Text style={styles.buttonText}>Add Card</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.button}
+              onPress={() => this.props.navigation.navigate(
+                'CardQuiz',
+                { deck: deck.title }
+            )}>
+              <Text style={styles.buttonText}>Start Quiz</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.button}
+              onPress={this.handleDeleteDeck}>
+              <Text style={styles.buttonText}>Delete Deck</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     )
   }

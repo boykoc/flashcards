@@ -2,7 +2,7 @@
 
 export const RECIEVE_DECKS = 'RECIEVE_DECKS'
 
-export function recieveDecks (decks) {
+export function recieveDecks (decks = {}) {
     return {
         type: RECIEVE_DECKS,
         decks
